@@ -1,0 +1,118 @@
+{
+    "exercicios": [
+        {
+            "1.1" : {
+                "pessoas": [
+                    {
+                        "primerNome": "Nome1",
+                        "ultimoNome": "UltimoNome"
+                    },
+                    {
+                        "primerNome": "Nome1",
+                        "ultimoNome": "UltimoNome"
+                    }
+                ]
+            },
+            "1.2" : {
+                "vehiculos": {
+                    "carro": [
+                        {
+                            "numeroDeLugares": 4,
+                            "cor": "blue"
+                        },
+                        {
+                            "numeroDeLugares": 5,
+                            "cor": "pink"
+                        }
+                    ],
+                    "mota": [
+                        {
+                            "numeroDeLugares": 2,
+                            "cor": "red"
+                        },
+                        {
+                            "numeroDeLugares": 1,
+                            "cor": "yellow"
+                        }
+                    ]
+                }
+            },
+            "1.3" : {
+                "unidadesCurriculares" :[
+                    {
+                        "id": 1,
+                        "acronimo": "AS",
+                        "nome": "sadgngasgavn",
+                        "cargaHoraria": 4
+                    },
+                    {
+                        "id": 2,
+                        "acronimo": "TY",
+                        "nome": "MNTFOPMHYFPON",
+                        "cargaHoraria": 3
+                    }
+                ]
+            },
+            "1.4" : {
+                "filmes": [
+                    {
+                        "nome": "Duro de Matar",
+                        "ano": 2008,
+                        "atores": [
+                            {
+                                "nome": "Will smith"
+                            },
+                            {
+                                "nome": "Não conheço outro"
+                            } 
+                        ]
+                    },
+                    {
+                        "nome": "Duro de Matar 2",
+                        "ano": 2008,
+                        "atores": [
+                            {
+                                "nome": "Will smith"
+                            },
+                            {
+                                "nome": "Não conheço outro"
+                            } 
+                        ]
+                    }
+                ]
+            },
+            "1.5" : {
+                "bandasDeMusica": [
+                    {
+                        "nome": "nome1",
+                        "genero": "rock",
+                        "albums": [
+                            {
+                                "nome": "nomeAlbum",
+                                "ano": 2014
+                            },
+                            {
+                                "nome": "nomeAlbum2",
+                                "ano": 2016
+                            }
+                        ]
+                    },
+                    {
+                        "nome": "nome2",
+                        "genero": "pop",
+                        "albums": [
+                            {
+                                "nome": "nomeAlbum",
+                                "ano": 2013
+                            },
+                            {
+                                "nome": "nomeAlbum2",
+                                "ano": 2018
+                            }
+                        ]
+                    }
+                ]
+            } 
+        }
+    ]
+}

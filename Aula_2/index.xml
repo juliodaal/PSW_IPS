@@ -1,20 +1,20 @@
-<?xml  version="1.0" enconding="utf-8" ?>
+<?xml  version="1.0" encoding="UTF-8" ?>
 
 <!DOCTYPE empresa[
-    <!ELEMENT empresa(armazens) >
-    <!ELEMENT armazens(armazen)* >
-    <!ELEMENT armazen(morada,telefone,fax,produtos) >
+    <!ELEMENT empresa (armazens) >
+    <!ELEMENT armazens (armazen)* >
+    <!ELEMENT armazen (morada,telefone,fax,produtos) >
     <!ATTLIST armazen codigo CDATA #REQUIRED >
-    <!ELEMENT morada(rua,localidade) >
-    <!ELEMENT rua(#PCDATA) >
-    <!ELEMENT localidade(#PCDATA) >
-    <!ELEMENT telefone(#PCDATA) >
-    <!ELEMENT fax(#PCDATA) >
-    <!ELEMENT produtos(produto)* >
-    <!ELEMENT produto(dimensao,quantidade) >
+    <!ELEMENT morada (rua,localidade) >
+    <!ELEMENT rua (#PCDATA) >
+    <!ELEMENT localidade (#PCDATA) >
+    <!ELEMENT telefone (#PCDATA) >
+    <!ELEMENT fax (#PCDATA) >
+    <!ELEMENT produtos (produto)* >
+    <!ELEMENT produto (dimensao,quantidade) >
     <!ATTLIST produto prod_id CDATA #REQUIRED >
-    <!ELEMENT dimensao(#PCDATA) >
-    <!ELEMENT quantidade(#PCDATA) >
+    <!ELEMENT dimensao (#PCDATA) >
+    <!ELEMENT quantidade (#PCDATA) >
 ]>
 
 <empresa>
@@ -55,5 +55,5 @@
                 </produto>  
             </produtos>
         </armazen>
-    <armazens>
+    </armazens>
 </empresa>
