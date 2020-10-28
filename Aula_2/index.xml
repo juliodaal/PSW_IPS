@@ -1,0 +1,59 @@
+<?xml  version="1.0" enconding="utf-8" ?>
+
+<!DOCTYPE empresa[
+    <!ELEMENT empresa(armazens) >
+    <!ELEMENT armazens(armazen)* >
+    <!ELEMENT armazen(morada,telefone,fax,produtos) >
+    <!ATTLIST armazen codigo CDATA #REQUIRED >
+    <!ELEMENT morada(rua,localidade) >
+    <!ELEMENT rua(#PCDATA) >
+    <!ELEMENT localidade(#PCDATA) >
+    <!ELEMENT telefone(#PCDATA) >
+    <!ELEMENT fax(#PCDATA) >
+    <!ELEMENT produtos(produto)* >
+    <!ELEMENT produto(dimensao,quantidade) >
+    <!ATTLIST produto prod_id CDATA #REQUIRED >
+    <!ELEMENT dimensao(#PCDATA) >
+    <!ELEMENT quantidade(#PCDATA) >
+]>
+
+<empresa>
+    <armazens>
+        <armazen codigo="x">
+            <morada>
+                <rua>R1</rua>
+                <localidade>Setubal</localidade>
+            </morada>
+            <telefone>123</telefone>
+            <fax>r3</fax>
+            <produtos>
+                <produto prod_id="1">
+                    <dimensao>100cm</dimensao>    
+                    <quantidade>1</quantidade>
+                </produto>  
+                <produto prod_id="2">
+                    <dimensao>1200cm</dimensao>
+                    <quantidade>4</quantidade>
+                </produto>  
+            </produtos>
+        </armazen>
+        <armazen codigo="y">
+            <morada>
+                <rua>R2</rua>
+                <localidade>Amora</localidade>
+            </morada>
+            <telefone>456</telefone>
+            <fax>r4</fax>
+            <produtos>
+                <produto prod_id="1">
+                    <dimensao>100cm</dimensao>    
+                    <quantidade>4</quantidade>
+                </produto>  
+                <produto prod_id="2">
+                    <dimensao>1200cm</dimensao>
+                    <quantidade>6</quantidade>
+                </produto>  
+            </produtos>
+        </armazen>
+    <armazens>
+</empresa>
