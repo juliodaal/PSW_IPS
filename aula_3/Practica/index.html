@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica</title>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+        }
+        label{
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <label for="name">Nome</label>
+        <input type="text" name="name" required>
+        <label for="email">Email</label>
+        <input type="email" name="email" required>
+        <label for="direction">Morada</label>
+        <input type="text" name="direction" required>
+        <label for="zipcode">Código Postal</label>
+        <input type="text" pattern="[0-9]{4}-[0-9]{3}" name="zipcode">
+        <label for="homepage">Homepage</label>
+        <input type="url" name="homepage">
+        <label for="color">Cor</label>
+        <input type="color" name="color">
+        <label for="bornDate">Data de Nascimento</label>
+        <input type="date" name="bornDate">
+        <label for="currentAverage">Média Atual</label>
+        <input type="number" name="currentAverage" min="0" max="20" step="5">
+        <label for="comments">Observações</label>
+        <textarea name="comments" maxlength="100"></textarea>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
