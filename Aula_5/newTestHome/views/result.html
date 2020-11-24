@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/form" method="get">
+        <table border="1" cellspacing="5">
+            <thead class="text-center">
+                <th>Ano</th>
+                <th>Juros</th>
+                <th>Capital</th>
+            </thead>
+            <tbody id="tbody">
+                ${model}
+            </tbody>
+        </table>
+        <input type="submit" value="Voltar" />
+    </form>
+</body>
+</html>

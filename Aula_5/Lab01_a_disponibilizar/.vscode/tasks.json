@@ -1,0 +1,14 @@
+{
+    "version": "0.1.0",
+    "command": "explorer",
+    "windows": {
+        "command": "explorer.exe"
+        // "command": "C:\\Program Files\\Internet Explorer\\iexplore.exe"
+    },
+    "osx": {
+        "command": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    },
+    "args": [
+        "http://localhost:8081/"
+    ]
+}

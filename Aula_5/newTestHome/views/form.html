@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8" />
+    <title>Cálculo de Juros</title>
+    <link href="/styles/styles.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Cálculo de Juros</h1>
+    <form id="form" action="/result" method="post">
+        <fieldset>
+            <legend>Introduza a Informação:</legend>
+            <label for="start">Capital Inicial:</label>
+            <input id="start" name="start" type="text" size="7" /> € <br />
+            <label for="tax">Taxa de Juro Anual:</label>
+            <input id="tax" name="tax" type="text" size="5" /> % <br />
+            <label for="date">Início do Depósito:</label>
+            <input id="date" name="date" type="date" size="8" placeholder="aaaa-mm-dd"/> <br />
+            <label for="duration">Duração do Depósito:</label>
+            <select id="duration" name="duration">
+                <option value="5" selected="selected">5 anos</option>
+                <option value="10">10 anos</option>
+                <option value="15">15 anos</option>
+                <option value="20">20 anos</option>
+            </select> <br />
+            <input id="submit" name="submit" type="submit" value="Calcular" />
+            <input id="reset" name="reset" type="reset" value="Limpar" />
+        </fieldset>
+    </form>
+</body>
+</html>

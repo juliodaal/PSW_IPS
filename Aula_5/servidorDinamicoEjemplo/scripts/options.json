@@ -1,0 +1,11 @@
+{
+    "server": {
+        "port": 8081
+    },
+        "template": {
+        "folder": "views",
+        "extension": ".html",
+        "modelName": "model"
+    }
+}
+    
