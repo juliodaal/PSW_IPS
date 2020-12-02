@@ -12,6 +12,15 @@ app.use(express.static("www"));
 app.get("/people", (req, res) => {
     requestHandlers.getPeople(req, res)
 });
+app.post("/people", (req, res) => {
+    // requestHandlers.getPeople(req, res)
+});
+app.put("/people", (req, res) => {
+    // requestHandlers.getPeople(req, res)
+});
+app.delete("/people", (req, res) => {
+    // requestHandlers.getPeople(req, res)
+});
 // Countries
 app.get("/countries", function (req, res) {
     requestHandlers.getCountries(req, res)

@@ -1,0 +1,50 @@
+body{
+	font-family: 'Open Sans', sans-serif;
+	background:#fff;
+	font-size: 16px;
+	margin:0;
+}
+
+nav {
+	background:rgb(109, 109, 109);
+	height:70px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.menu{
+	float:left;
+	margin: 10px 0 0;
+}
+
+.menu li{
+	display:inline-block;
+}
+
+.menu li a{
+  	display: block;
+	font-size: 0.82em;
+	text-transform: uppercase;
+	padding: 5px 20px;
+	color: #FFF;
+	font-weight: 600;
+}
+
+table {
+    border-collapse: collapse;
+    width: 90%;
+	margin:50px auto;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+#headerTitle{
+    width: 100px;
+    margin-left:auto;
+    margin-right:auto;
+}
