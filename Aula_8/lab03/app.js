@@ -12,16 +12,16 @@ app.use(express.static("www"));
 app.get("/person", requestHandlers.getPeople);
 app.get("/country", requestHandlers.getCountries);
 
-app.post("/person", requestHandlers.processingPerson);
-app.post("/people", (req, res) => {
-    requestHandlers.processingPerson(req)
+app.post("/person", (req, res) => {
+    requestHandlers.createUpdatePerson(req, res)
 });
 
-app.put("/people/:id", (req, res) => {
-    requestHandlers.getPeople(req)
+app.put("/person/:id", (req, res) => {
+    requestHandlers.createUpdatePerson(req, res)
 });
-app.delete("/people/:id", (req, res) => {
-    requestHandlers.getPeople(req)
+
+app.delete("/person/:id", (req, res) => {
+    requestHandlers.removePerson(req, res)
 });
 
 app.listen(8081, function () {

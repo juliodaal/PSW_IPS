@@ -78,17 +78,17 @@ Information.prototype.showPerson = function () {
     var divTable = document.createElement("divTable");
     divTable.setAttribute("id", "divTable");
     divTable.appendChild(table);
-   
-    let button1  = createButton(document.createElement("div"), newPerson, "New Person")
-    let button2  = createButton(document.createElement("div"), deletePerson, "Delete Person")
-    let button3 = createButton(document.createElement("div"), updatePerson, "Update Person")
-    /** @todo Completar */
-    divTable.appendChild(button1);
-    divTable.appendChild(button2);
-    divTable.appendChild(button3);
+    divTable.appendChild(addButtons(newPerson, "New Person"));
+    divTable.appendChild(addButtons(deletePerson, "Delete Person"));
+    divTable.appendChild(addButtons(updatePerson, "Update Person"));
 
     replaceChilds(this.id,divTable);
 };
+function addButtons(callback, value){
+    const span = document.createElement("span")
+    span.setAttribute("name", "btn")
+    return createButton(span, callback, value)
+}
 
 /**
  * Função que substitui todos os elementos filhos de um elemento HTML por um novo elemento HTML (facilitador de DOM)
@@ -110,7 +110,7 @@ function replaceChilds(id, newSon) {
  */
 function tableLine(object, headerFormat) {
     var tr = document.createElement("tr");
-    if (!headerFormat) tr.appendChild(createCellCheckbox());
+    if (!headerFormat) tr.appendChild(createCellCheckbox(object.id));
     else tr.appendChild(document.createElement("th"));
     var tableCell = null;
     for (var property in object) {
@@ -146,24 +146,54 @@ function createButton(fatherNode, eventHandler, value){
 /**
  * Função genérica que tem como objetivo a criação de uma coluna com checkbox
  */
-function createCellCheckbox(){
+function createCellCheckbox(id){
     var td=document.createElement("td");
     var check = document.createElement("input");
     check.type="checkbox";
+    check.name= "checkbox";
+    check.value= id;
     td.appendChild(check);
     return td;
 }
 
 function newPerson(){
+    hiddenThings()
+    info.putCountries()
+}
+function deletePerson(){
+    selectedCheck(info.removePerson)
+}
+function updatePerson(){
+    hiddenThings()
+    info.putCountries()
+}
+function selectedCheck(callback = false){
+    const arrayChecks = document.getElementsByName("checkbox")
+    let result = {result: false, id: null}
+    arrayChecks.forEach(element => {
+        if(element.checked){
+            if(callback){return callback(element.value)} else {result = {result: true, id: element.value} } 
+        }
+    });
+    return result
+}
+function hiddenThings(){
     document.getElementById("headerTitle").textContent="People";
     document.getElementById("formPerson").style.display="block";
     document.getElementById("tablePerson").style.display="none";
+    const spans = document.getElementsByName("btn");
+    spans.forEach(span => {
+        span.style.display="none"
+    });
 }
-function deletePerson(){
-    
-}
-function updatePerson(){
-    
+Information.prototype.putCountries = function (){
+    const select = document.getElementById("countries")
+    this.countries.forEach(country => {
+        let option = document.createElement("option")
+        option.setAttribute("value", `${country.id}`)
+        option.innerText = country.name
+        select.appendChild(option)
+    });
 }
 
 /**
@@ -204,15 +234,31 @@ function updatePerson(){
  * Função que apaga o recurso pessoa com ym pedido ao NODE.JS através do verbo DELETE, usando pedidos assincronos e JSON
   */
 Information.prototype.removePerson = function (id){
-    /** @todo Completar */
+    const xhr = new XMLHttpRequest();
+    xhr.open('DELETE',`http://localhost:8081/person/${id}`);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send();
 }
 /**
  * Função que insere ou atualiza o recurso pessoa com um pedido ao servidor NODE.JS através do verbo POST ou PUT, usando pedidos assincronos e JSON
  *  * @param {String} acao - controla qual a operação do CRUD queremos fazer
   */
 Information.prototype.processingPerson = function (acao) {
-    /** @todo Completar */
+    let flag = selectedCheck()
+    const iForm = document.getElementById('formPerson')
+    let form = new FormData(iForm)
+    let data = {
+                    name : form.get('name'), 
+                    date : form.get('date'), 
+                    countries : form.get('countries')
+                }
+    const jsonString = JSON.stringify(data)
+    const xhr = new XMLHttpRequest()
+    if(!flag.result){
+        xhr.open('POST','http://localhost:8081/person');
+    } else {
+        xhr.open('PUT',`http://localhost:8081/person/${flag.id}`);
+    }
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(jsonString)
 }
-
-
-
