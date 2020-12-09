@@ -50,7 +50,7 @@ function getCountries(req, res) {
         }
         });
 
-        var sql = "SELECT name, shortName FROM country";
+        var sql = "SELECT id, name, shortName FROM country";
         connection.query(sql, function (err, rows) {
             if (err) {
                 console.log("erro: " + err.message);

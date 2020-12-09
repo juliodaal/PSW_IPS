@@ -68,32 +68,12 @@ Information.prototype.showHome = function () {
  */
 Information.prototype.showPerson = function () {
     document.getElementById('headerTitle').innerHTML = "People"
-    document.getElementById('divInformation').innerHTML = `
-        <table>
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Name</th>
-                    <th>BirthDate</th>
-                    <th>idCountry</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>${this.people[0].id}</td>
-                    <td>${this.people[0].name}</td>
-                    <td>${this.people[0].birthDate}</td>
-                    <td>${this.people[0].idCountry}</td>
-                </tr>
-                <tr>
-                <td>${this.people[1].id}</td>
-                <td>${this.people[1].name}</td>
-                <td>${this.people[1].birthDate}</td>
-                <td>${this.people[1].idCountry}</td>
-                </tr>
-            </tbody>
-        </table>
-    `
+    const table = document.createElement("table")
+    table.appendChild(tableLine(new Person(), true))
+    this.people.forEach(people => {
+        table.appendChild(tableLine(people, false))
+    });
+    replaceChilds(this.id, table)
 };
 
 /**
@@ -101,22 +81,12 @@ Information.prototype.showPerson = function () {
  */
 Information.prototype.showCountry = function () {
     document.getElementById('headerTitle').innerHTML = "Countries"
-    document.getElementById('divInformation').innerHTML = `
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Short Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>${this.countries[0].name}</td>
-                    <td>${this.countries[0].shortName}</td>
-                </tr>
-            </tbody>
-        </table>
-    `
+    const table = document.createElement("table")
+    table.appendChild(tableLine(new Country(), true))
+    this.countries.forEach(countries => {
+        table.appendChild(tableLine(countries, false))
+    });
+    replaceChilds(this.id, table)
 };
 
 /**
