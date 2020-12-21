@@ -1,0 +1,33 @@
+<form action="/user-created" , method="post">
+    <h1>Criar cliente</h1>
+    <table>
+        <tbody>
+            <tr>
+                <td class="columnLabel"><label for="description"> Nome:</label></td>
+                <td>
+                    <input id="description" name="description" type="text" style="width: 20em;" />
+                </td>
+            </tr>
+            <tr>
+                <td class="columnLabel"><label for="address"> Morada:</label></td>
+                <td>
+                    <input id="address" name="address" type="text" style="width: 20em;" />
+                </td>
+            </tr>
+            <tr>
+                <td class="columnLabel"><label for="postalCode"> Código Postal:</label></td>
+                <td>
+                    <input id="internalCode" name="internalCode" type="hidden" />
+                    <input id="postalCode" name="postalCode" type="text" style="width: 5em;" />
+                    <span id="postalDescription"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Gravar" />
+                    |&nbsp;
+                    <input type="reset" value="Limpar" /></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+<script src="/scripts/postal-code-ajax.js"></script>

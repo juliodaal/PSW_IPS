@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lab04</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/lab04.css" />
+    <script src="./scripts/d3.min.js"></script>
+    <script src='scripts/lab04.js'></script>
+    <script src='scripts/lab04chart.js'></script>
+</head>
+<body>
+    <nav>
+        <div class="menu">
+            <ul class="nav">
+                <li><a id="menuHome" href="javascript: info.showHome();">Home</a></li>
+                <li><a id="menuHSensors" href="javascript: info.showSensors();">Sensors</a></li>
+            </ul>
+        </div>
+    </nav>
+    <br />
+    <h3 id="headerTitle">Home</h2>
+    <div id="divInformation">
+    </div>
+    <div id="divChart">
+        <svg id="svg1" class="svgContainer"></svg>
+        <svg id="svg2" class="svgContainer"></svg>
+        <svg id="svg3" class="svgContainer"></svg>
+    </div>
+</body>
+</html>
