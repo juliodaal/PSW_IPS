@@ -1,0 +1,49 @@
+
+        {{!-- <p>{{id}}</p>
+        <a href="/task/edit/{{id}}">Edit Task</a>
+    <form action="/task/delete/{{id}}?_method=DELETE" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit">Delete</button>
+    </form>     --}}
+{{>modalAddTask}}
+{{>modalAddProject}}
+<div class="col-sm-10 py-5 my-3 mx-auto scroll" style="height: fit-content; min-height: 85vh; overflow-y: scroll; transition: .6s;">
+{{#if data}}
+    {{#each data }}
+    <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-id="{{id}}" style="max-width: 1200px !important; transition: .6s; transform: translateX(0px);">
+        <div class="toast-header d-flex align-items-center">
+            <div class="d-inline-block align-middle bg-primary rounded-sm mr-2" style="width: 1.25rem; height: 1.25rem;"></div>
+            <h6 class="font-size-sm mb-0 mr-auto" data-id="{{id}}">{{titulo}}</h6>
+            <small class="font-weight-medium text-muted" style="margin-right: 8px;">{{date}}</small>
+            <button type="button" class="close ml-2 mb-1 d-flex align-items-center" data-dismiss="toast" aria-label="Close" onclick="app.processingTaskCustom(event,{{id}},'done');" id="btn-task-done" style="margin: 0px !important;">
+                <i class="fe-check-square mr-2 c" style="font-size: 18px; margin-right: 4px;"></i>
+                <small class="font-weight-medium text-muted" style="font-size: 12px;">Done</small>
+            </button>
+        </div>
+        <div class="toast-body d-flex justify-content-between">
+            <p class="m-0 p-0 description-task" id="description-task" data-description="description" style="width: 70%;">{{descricao}}</p>
+            <div class="d-flex">
+                <button type="button" class="btn d-flex align-items-center p-0 mx-2 icon-task btn-task-edit" onclick="app.processingTaskCustom(event,{{id}},'edit');" id="btn-task-edit" style="cursor: pointer !important;">
+                    <i class="fe-edit mr-2" style="font-size: 18px; margin-right: 4px;"></i>
+                </button>
+                <button type="button" class="btn d-flex align-items-center p-0 mx-2 icon-task" onclick="app.processingTaskCustom(event,{{id}},'calendar');" id="btn-task-calendar" style="cursor: pointer !important;">
+                    <i class="fe-calendar mr-2" style="font-size: 18px; margin-right: 4px;"></i>
+                </button>
+                <button type="button" class="btn d-flex align-items-center p-0 mx-2 icon-task" onclick="app.processingTaskCustom(event,{{id}},'project');" id="btn-task-project" style="cursor: pointer !important;">
+                    <i class="fe-clipboard mr-2" style="font-size: 18px; margin-right: 4px;"></i>
+                </button>
+                <button type="button" class="btn d-flex align-items-center p-0 mx-2 icon-task" onclick="app.processingTaskCustom(event,{{id}},'delete');" id="btn-task-delete" style="cursor: pointer !important;">
+                    <i class="fe-delete mr-2" style="font-size: 18px; margin-right: 4px;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+{{else}}
+    <div class="jumbotron">
+        <h1>There are no tasks!</h1>
+        <hr class="my-4">
+        <p class="pb-3">It is necessary to add a task!</p>
+    </div>
+{{/if}}
+</div>

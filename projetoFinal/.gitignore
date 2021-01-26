@@ -1,0 +1,10 @@
+# dependencies
+/node_modules
+/dist
+ss
+# pictures
+*.jpg
+*.png 
+
+# environment variables
+.env

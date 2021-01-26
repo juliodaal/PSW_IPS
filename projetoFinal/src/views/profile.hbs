@@ -1,0 +1,10 @@
+{{>modalAddTask}}
+{{>modalAddProject}}
+<div class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll; transition: .6s;">
+    {{#if user}}
+    <p>{{user.id}}</p>
+    <p>{{user.nome}}</p>
+    <p>{{user.apelido}}</p>
+    <p>{{user.email}}</p>
+    {{/if}}
+</div>
