@@ -1,0 +1,26 @@
+<section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;">
+    <div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Apelido</th>
+            <th>Email</th>
+            <th>Ver</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#each box}}
+                <tr>
+                    <th scope="row">{{id}}</th>
+                    <td>{{nome}}</td>
+                    <td>{{apelido}}</td>
+                    <td>{{email}}</td>
+                    <td><a href="/dashboard/client/{{id}}"><u>Ver</u></a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    </div>
+</section>
