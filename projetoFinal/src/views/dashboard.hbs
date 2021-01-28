@@ -1,0 +1,27 @@
+<section class="container" style="height: fit-content; min-height: 85vh; overflow-y: scroll;">
+    <!-- Basic table -->
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Tipo</th>
+        <th>Quantidade Atual</th>
+        <th>Cheio</th>
+        <th>Total Reciclado</th>
+      </tr>
+    </thead>
+    <tbody>
+        {{#each box}}
+            <tr>
+                <th scope="row">{{id}}</th>
+                <td>{{tipo}}</td>
+                <td>{{quantidade_atual}}</td>
+                <td>{{aviso}}</td>
+                <td>{{total_reciclado}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+  </table>
+</div>
+</section>
