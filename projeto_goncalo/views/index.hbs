@@ -1,0 +1,171 @@
+{{!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Safer</title>
+    <!--Defer carregar por ultimo os scripts-->
+    <script defer src="./scripts/d3.min.js"></script>
+    <script defer src='scripts/lab04.js'></script>
+    <script defer src='scripts/lab04chart.js'></script>
+    <link rel="stylesheet" href="styles/css/style.css"/>
+    <link rel="stylesheet" href="styles/css/lightslider.css">
+
+    <!--Js Link------------------------------------------------------------------------------------------------>
+    <script defer src="styles/js/JQuery3.3.1.js"></script>
+    <script defer src="styles/js/lightslider.js"></script>
+    <!--Icon do Site------------------------------------------------------------------------------------------------>
+    <link rel="icon do site" href="styles/images/icon.jpg"/>
+    <!--Link da FontAwesome para icons personalizados------------------------------------------------------------------------------------------------>
+    <script defer src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+</head>
+<body> --}}
+  <nav>
+    <!--Logo------------------------------------------------------------------------------------------------>
+    <a href="#" class="logo">
+      <img alt="" src="styles/images/logo.png"/>
+    </a>
+    <!--Menu Button------------------------------>
+    <input type="checkbox" class="menu-btn" id="menu-btn"/>
+    <label class="menu-icon" for="menu-btn">
+      <span class="nav-icon"></span>
+    </label>
+    <!--Menu------------------------------------------------------------------------------------------------>
+    <ul class="menu">
+      <li><a id="menuHome" href="#">Home</a></li>
+      <li><a if="animeSeires" href="javascript: info.showAnimeSeries();">Anime Series</a></li>
+      <li><a id="animeFilme" href="javascript: info.showAnimeFilmes();">Anime Filmes</a></li>
+      <li><a id="mangas" href="javascript: info.mangas();">Manga</a></li>
+      {{#if user}}
+      <li><a href="/settings">{{user.name}}</a></li>
+      <li><a href="/logout">Log Out</a></li>
+      {{else}}
+      <li><a if="login" href="/login">Login</a></li>
+      {{/if}}
+    </ul>
+    <!--Barra de pesquisa------------------------------------------------------------------------------------------------>
+    <div class="search">
+      <input type="text" placeholder="Encontra o teu anime favorito"/>
+      <!--Icon da barra de pesquisa da fontAwesome------------------------------------------------------------------------------------------------>
+      <!--<i class="fas fa-search"></i>-->
+    </div>
+  </nav>
+  <section id="main">
+    {{!-- Tens de ir a BD a procura de os animes --}}
+    <!--Showcase dos Melhores Animes------------------------------------------------------------------------------------------------>
+    <!--Heading (Light Slider)------------------------------------------------------------------------------------------------>
+    <h1 class="showcase-heading">Melhores Animes</h1>
+
+    <ul id="autoWidth" class="cs-hidden">
+      <!--1 Caixa------------------------------------------------------------------------------------------------>
+      <li class="item-a">
+        <a href="/anime/save/1">  <!--isto-->
+          <div class="showcase-box">
+          <img alt="" src="styles/images/naruto.png">
+        </div>
+        </a> <!--isto-->
+        <!--Showcase-box------------------------------------------------------------------------------------------------>
+      </li>
+
+      <!--2 Caixa------------------------------------------------------------------------------------------------>
+      <li class="item-b">
+        <a href="/anime/save/2">
+          <!--Showcase-box------------------------------------------------------------------------------------------------>
+          <div class="showcase-box">
+            <img alt="" src="styles/images/codegeass.jpg">
+          </div>
+        </a>
+      </li>
+
+      <!--3 Caixa------------------------------------------------------------------------------------------------>
+      <li class="item-c">
+        <!--Showcase-box------------------------------------------------------------------------------------------------>
+        <div class="showcase-box">
+          <img alt ="" src="styles/images/gurrenlagan.png">
+        </div>
+      </li>
+
+      <!--4 Caixa------------------------------------------------------------------------------------------------>
+      <li class="item-d">
+        <!--Showcase-box------------------------------------------------------------------------------------------------>
+        <div class="showcase-box">
+          <img alt="" src="styles/images/samuraichamploo.jpg">
+        </div>
+      </li>
+      
+      <!--5 Caixa------------------------------------------------------------------------------------------------>
+      <li class="item-e">
+        <!--Showcase-box------------------------------------------------------------------------------------------------>
+        <div class="showcase-box">
+         <img alt=""src="styles/images/shieldhero.png">
+        </div>
+      </li>
+
+    </ul>
+  </section>
+    <!--Parte dos Animes------------------------------------------------------------------------------------------------>
+    <div class="anime-heading">
+      <h2>Animes</h2>
+    </div>
+    <section id="anime-list">
+      <!--Box 1-->
+      {{!-- <div class="anime-box">
+        <!--Imagem-->
+        <div class="anime-img">
+          <a href="/formulario">
+          <img alt ="" src="styles/images/add.png"></a>
+        </div>
+        <!--Texto-->
+        <a href="#">
+          Adicionar.
+        </a>
+      </div> --}}
+      <!--Box 2-->
+      {{#if animes}}
+      {{#each animes}}
+      {{animes}}
+          <div class="anime-box"style="border-style: ridge"  ;>
+            <div class="foto">
+              <img class="anime-img" height="400px" width="300px" src="{{image}}" alt="{{name_anime}}">
+            </div>
+            <div>
+              {{name_anime}}
+            </div>
+            <br><br>
+          </div>
+      {{/each}}
+      {{/if}}
+
+    </section>
+    <!--Buttons------------------------------------------------------------------------------------>
+    {{!-- <div class="btns">
+      <a href="#">Previous</a>
+      <a href="#">Next</a>
+    </div> --}}
+
+
+    <!--Footer------------------------------------------------------------------------------------------------------>
+    <footer>
+      <p>Bah Dja Peh Company</p>
+    </footer>
+    <!--Slider Script------------------------------------------------------------------------------------------------>
+  <!--Tem de ter 2 autowidth pk n pode usar o mesmo nome nos 2 Sliders-->
+  {{!-- <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+  <script>
+      $(document).ready(function() {
+    $('#autoWidth, #autoWidth2').lightSlider({
+        autoWidth:true,
+        loop:true,
+        onSliderLoad: function() {
+            $('#autoWidth,#autoWidth2').removeClass('cS-hidden');
+        } 
+    });  
+  });
+  </script>
+</body>
+</html> --}}
