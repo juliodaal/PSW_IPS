@@ -1,0 +1,24 @@
+<section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;" id="section">
+    <a type="button" href="/box/type" class="btn btn-outline-info mb-4">Add Type Box</a>
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <form action="/client" method="post">
+                <div class="form-group">
+                    <label for="type-input">Tipo</label>
+                    <select class="form-control custom-select" name="type" id="type-input"></select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantidade Atual</label>
+                    <input class="form-control" type="number" name="quantity" id="quantity-input" placeholder="The Current Quantity Here.." required>
+                </div>
+                <button class="btn btn-success" type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 d-flex justify-content-center align-content-center flex-column">
+            <h4>Tipo</h4>
+            <p>É o tipo de box</p>
+            <h4>Organização</h4>
+            <p>É a quantidade neste momento do box</p>
+        </div>
+    </div>
+</section>
