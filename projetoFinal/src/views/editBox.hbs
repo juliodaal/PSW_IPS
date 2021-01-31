@@ -1,0 +1,39 @@
+<section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;">
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            {{#if box}}
+            <form action="/box/edit/{{box.id}}" method="post">
+                <div class="form-group">
+                    <label for="type">Tipo</label>
+                    <p class="form-control">{{box.tipo}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantidade Atual</label>
+                    <input class="form-control" type="number" name="quantity" id="quantity-input" value="{{box.quantidade_atual}}">
+                </div>
+                <div class="form-group">
+                    <label for="full">Cheio</label>
+                    <input class="form-control" type="number" name="full" id="full-input" value="{{box.aviso}}">
+                </div>
+                <div class="form-group">
+                    <label for="recycle">Total Reciclado</label>
+                    <input class="form-control" type="number" name="recycle" id="recycle-input" value="{{box.total_reciclado}}">
+                </div>
+                <button class="btn btn-warning" type="submit">Editar</button>
+            </form>
+            {{else}}
+            <h1 class="text-center">Client Not Found</h1>
+            {{/if}}
+        </div>
+        <div class="col-12 col-sm-6 d-flex justify-content-center align-content-center flex-column">
+            <h4>Tipo</h4>
+            <p>É o tipo de box</p>
+            <h4>Quantidade Atual</h4>
+            <p>É a quantidade neste momento</p>
+            <h4>Cheio</h4>
+            <p>Se encontra cheio?</p>
+            <h4>Total Reciclado</h4>
+            <p>É o historico de reciclagem</p>
+        </div>
+    </div>
+</section>

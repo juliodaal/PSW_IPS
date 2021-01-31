@@ -1,0 +1,21 @@
+<section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;" id="section" data-user="{{user.id}}">
+    {{#if user}}
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <form action="/box/type/delete/{{user.id}}" method="post">
+                <div class="form-group">
+                    <label for="type-input">Tipo</label>
+                    <select class="form-control custom-select" name="type" id="type-input"></select>
+                </div>
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 d-flex justify-content-center align-content-center flex-column">
+            <h4>Tipo</h4>
+            <p>É o tipo de box</p>
+        </div>
+    </div>
+    {{else}}
+        <h1>User Not Exits</h1>
+    {{/if}}
+</section>
