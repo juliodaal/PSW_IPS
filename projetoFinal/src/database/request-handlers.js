@@ -14,13 +14,275 @@ function Exception(message, type) {
  * Function that creates a new task
  * @param {*} body 
  * */ 
-let createUser = (body) => {
-    let args = Object.values(body);
-    let query = "insert into utilizador (nome, apelido, email, pwd, tipo_from_tipo_utilizador) values (?,?,?,?,1);";
-    return packingRequest(args,query,"User already exists", "User created with success");
+let getDataDashboard = (req) => {
+    let args = [req.user.tipo_from_tipo_utilizador, req.user.id];
+    let query = "select b.id,tb.tipo,b.quantidade_atual,b.aviso,b.total_reciclado from utilizador u join box b on u.id=b.id_utilizador_form_utilizador join tipo_box tb on b.tipo_from_tipo_box=tb.id where u.tipo_from_tipo_utilizador = ? and u.id = ? order by id;";
+    return packingRequest(args,query,"Box do not exists", "Box found");
 }
 
-module.exports.createUser = createUser;
+module.exports.getDataDashboard = getDataDashboard;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let getDataDashboardById = (id) => {
+    let args = [1,parseInt(id)];
+    let query = "select b.id,tb.tipo,b.quantidade_atual,b.aviso,b.total_reciclado from utilizador u join box b on u.id=b.id_utilizador_form_utilizador join tipo_box tb on b.tipo_from_tipo_box=tb.id where u.tipo_from_tipo_utilizador = ? and u.id = ? order by id;";
+    return packingRequest(args,query,"Client do not exists", "Client found");
+}
+
+module.exports.getDataDashboardById = getDataDashboardById;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let createClient = (body) => {
+    let {name,lastName,email,password,company} = body;
+    let query = "insert into utilizador (nome,apelido,email,pwd,company,tipo_from_tipo_utilizador) values (?,?,?,?,?,1);";
+    return packingRequest([name,lastName,email,password,company],query,"Error creating the client", "Client Created");
+}
+
+module.exports.createClient = createClient;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let createWorker = (body) => {
+    let {name,lastName,email,password,company} = body;
+    let query = "insert into utilizador (nome,apelido,email,pwd,company,tipo_from_tipo_utilizador) values (?,?,?,?,?,2);";
+    return packingRequest([name,lastName,email,password,company],query,"Error creating the worker", "Worker Created");
+}
+
+module.exports.createWorker = createWorker;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let getDataClientDashboard = (req) => {
+    let query = "select id,nome,apelido,company,email from utilizador where tipo_from_tipo_utilizador = ?;";
+    return packingRequest([1],query,"Client do not exists", "Client found");
+}
+
+module.exports.getDataClientDashboard = getDataClientDashboard;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let getDataWorkerDashboard = (req) => {
+    let query = "select id,nome,apelido,company,email from utilizador where tipo_from_tipo_utilizador = ?;";
+    return packingRequest([2],query,"Client do not exists", "Client found");
+}
+
+module.exports.getDataWorkerDashboard = getDataWorkerDashboard;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let getClientById = (id) => {
+    let query = "select id,nome,apelido,email,company from utilizador where id = ? and tipo_from_tipo_utilizador = 1;";
+    return packingRequest([id],query,"Client do not exists", "Client found");
+}
+
+module.exports.getClientById = getClientById;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let getClientStatistics = id => {
+    let query = "select id, data from historico_cliente where id_utilizador_from_utilizador = ?;";
+    return packingRequest([id],query,"Client do not exists", "Client found");
+}
+
+module.exports.getClientStatistics = getClientStatistics;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let getWorkerById = (id) => {
+    let query = "select id,nome,apelido,email,company from utilizador where id = ? and tipo_from_tipo_utilizador = 2;";
+    return packingRequest([id],query,"Worker do not exists", "Worker found");
+}
+
+module.exports.getWorkerById = getWorkerById;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let editClient = (body,id) => {
+    let {name,lastName,email,company}=body
+    let query = "update utilizador set nome = ?, apelido = ?, email = ?, company = ? where id = ?;";
+    return packingRequest([name,lastName,email,company,id],query,"Client do not exists", "Client found");
+}
+
+module.exports.editClient = editClient;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let deleteClient = async (id) => {
+    let query = "delete from box where id_utilizador_form_utilizador = ?;";
+    let response = packingRequest([id],query,"Client do not exists", "Client found");
+    response.then((res)=>{ 
+        if(res.message == "success"){
+            let query = "delete from tipo_box where id_utilizador_form_utilizador = ?;";
+            return packingRequest([id],query,"Client do not exists", "Client found");
+        } else {
+            throw handleError("Error finding the client")
+        }
+    }); 
+    return response.then((res) =>{
+        if(res.message == "success"){
+            let query = "delete from utilizador where id = ?;";
+            return packingRequest([id],query,"Client do not exists", "Client found");
+        } else {
+            handleError("Error finding the client")
+        }
+    });
+    
+}
+
+module.exports.deleteClient = deleteClient;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let deleteWorker = async (id) => {
+    let query = "delete from utilizador where id = ? and tipo_from_tipo_utilizador = ?;";
+    return packingRequest([id,2],query,"Client do not exists", "Client found");
+}
+
+module.exports.deleteWorker = deleteWorker;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let findTypesBox = (id) => {
+    let query = "select tipo from tipo_box where id_utilizador_form_utilizador = ?;";
+    return packingRequest([id],query,"Box Type not found", "Box Type found");
+}
+
+module.exports.findTypesBox = findTypesBox;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let createBoxType = (body,id) => {
+    let {type} = body
+    let query = "insert into tipo_box (id_utilizador_form_utilizador,tipo,total_reciclado) values (?,?,0);";
+    return packingRequest([id,type],query,"Box Type not found", "Box Type found");
+}
+
+module.exports.createBoxType = createBoxType;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let createBox = (body,id) => {
+    let {type,quantity} = body
+    let query = "select id from tipo_box where id_utilizador_form_utilizador = ? and tipo = ?;";
+    let response = packingRequest([id,type],query,"Box Type not found", "Box Type found")
+    .then((res) => {
+        if(res.message == "success"){
+            let typeId = res.data[0].id;
+            let query = "insert into box (id_utilizador_form_utilizador,tipo_from_tipo_box,quantidade_atual,total_reciclado,aviso) values (?,?,?,0,0);";
+            let responseBack = packingRequest([id,typeId,quantity],query,"Box Type not found", "Box Type found");
+            responseBack.then(res => {
+                let today = new Date();
+                let dd = String(today.getDate()).padStart(2, '0');
+                let mm = String(today.getMonth() + 1).padStart(2, '0');
+                let yyyy = today.getFullYear();
+                today = yyyy + '-' + dd + '-' + mm;
+                query = "insert into historico_cliente (id_utilizador_from_utilizador,id_box_from_box,data) values (?,?,STR_TO_DATE(?,'%Y-%m-%d'));";
+                packingRequest([id,res.data.insertId,today],query,"Box Type not found", "Box Type found");
+            })
+            return responseBack;
+        }
+    })
+    .catch((res)=>{
+        return res
+    })
+    return response
+}
+
+module.exports.createBox = createBox;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let findBox = (id) => {
+    let query = "select b.id,tb.tipo,b.quantidade_atual,b.aviso,b.total_reciclado from utilizador u join box b on u.id=b.id_utilizador_form_utilizador join tipo_box tb on b.tipo_from_tipo_box=tb.id where b.id = ?;";
+    return packingRequest([id],query,"Box Type not found", "Box Type found");
+}
+
+module.exports.findBox = findBox;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let editBox = (body,id) => {
+    let {quantity,full,recycle} = body;
+    let query = "update box set quantidade_atual = ?, total_reciclado = ?, aviso = ? where id = ?";
+    return packingRequest([quantity,recycle,full,id],query,"Box Type not found", "Box Type found");
+}
+
+module.exports.editBox = editBox;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let deleteBox = (id) => {
+    let query = "delete from box where id = ?";
+    return packingRequest([id],query,"Box not found", "Box found");
+}
+
+module.exports.deleteBox = deleteBox;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
+let deleteTypeBox = (body,id) => {
+    let {type} = body
+    let query = "delete from tipo_box where tipo = ? and id_utilizador_form_utilizador = ?;";
+    return packingRequest([type,id],query,"Box Type not found", "Box Type found");
+}
+
+module.exports.deleteTypeBox = deleteTypeBox;
 
 /**
  * 
@@ -61,210 +323,6 @@ let getUserPass = (body) => {
 
 module.exports.getUserPass = getUserPass;
 
-
-/**
- * 
- * Function that creates a new task
- * @param {*} body 
- * */ 
-let createNewTask = async (req,body) => {
-    // let args = Object.values(body); // Cambiar la query de abajo
-    let { message, date, project, priority } = body;
-    let query = "insert into tarefa (titulo,descricao,date,expirado,feita) values (?,?,STR_TO_DATE(?,'%Y-%m-%d'),0,0);";
-    let responseTask = await packingRequest([project,message,date],query,"Error in creating the task","Task Created");
-    if(responseTask.message != "error"){
-        let idTask = responseTask.data[1].insertId;
-        let idUser = req.user.id;
-        query = "insert into utilizador_tarefa (id_utilizador, id_tarefa) values (?,?);"
-        let responseUserTask = await packingRequest([idUser,idTask],query,"Error associating the task with the user","Task associated successfully to the user");
-        return responseUserTask;
-    } else {
-        return responseTask;
-    }
-}
-
-module.exports.createNewTask = createNewTask; 
-
-/**
- * 
- * Function that creates a new task
- * @param {*} body 
- * */ 
-let createProject = async (req,body) => {
-    // let args = Object.values(body); // Cambiar la query de abajo
-    let { message} = body;
-    let query = "insert into projeto (titulo,descricao) values (?,?);";
-    let responseTask = await packingRequest([message,"descricao"],query,"Error in creating the project","Project Created");
-    if(responseTask.message != "error"){
-        let idProject = responseTask.data[1].insertId;
-        let idUser = req.user.id;
-        query = "insert into utilizador_projeto (id_utilizador, id_projeto) values (?,?);"
-        let responseUserTask = await packingRequest([idUser,idProject],query,"Error associating the project with the user","Project associated successfully to the user");
-            return responseUserTask;
-    } else {
-        return responseTask;
-    }
-}
-
-module.exports.createProject = createProject;
-
- /**
- * 
- * Function
- * @param {*} params 
- * */ 
-let allTasks = (params) => {
-    let args = Object.values(params);
-    let query = "select t.id,t.titulo,t.descricao,t.date from utilizador u join utilizador_tarefa ut on u.id=ut.id_utilizador join tarefa t on ut.id_tarefa=t.id where ut.id_utilizador = ? and t.feita = 0;";
-    return packingRequest(args,query,"Error finding the tasks","Tasks Found");
-}
-module.exports.allTasks = allTasks;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let deleteTask = (body) => {
-    let query = "delete from tarefa where id = ?;";
-    return packingRequest([body.id],query,"Error finding the tasks", "Task deleted successfully");
-}
-module.exports.deleteTask = deleteTask;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let doneStatistics = (req) => {
-    let query = "select t.id, t.date from utilizador u join utilizador_tarefa ut on u.id=ut.id_utilizador join tarefa t on ut.id_tarefa=t.id where ut.id_utilizador = ? and t.feita = 1;";
-    return packingRequest([req.user.id],query,"Error finding the tasks", "Tasks founds successfully");
-}
-module.exports.doneStatistics = doneStatistics;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let deleteTaskUser = (req,body) => {
-    let args = [ body.id, req.user.id ];
-    let query = "delete from utilizador_tarefa where id_tarefa = ? and id_utilizador = ?;";
-    return packingRequest(args,query,"Error finding the tasks", "Task deleted successfully");
-}
-module.exports.deleteTaskUser = deleteTaskUser;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let getTask = (params) => {
-    let args = Object.values(params);
-    let query = "select * from utilizador where id = ?;";
-    return packingRequest(args,query,"Error finding the task");
-}
-module.exports.getTask = getTask;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let doneTask = (req,body) => {
-    let args = [ 1, body.id, req.user.id ];
-    let query = "update utilizador u join utilizador_tarefa ut on u.id=ut.id_utilizador join tarefa t on ut.id_tarefa=t.id set t.feita = ? where t.id = ? and u.id = ?;";
-    return packingRequest(args,query,"Error updating the task","Task updated successfully");
-}
-module.exports.doneTask = doneTask;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let updateTaskMessage = (req,body) => {
-    let args = [ body.message, body.id, req.user.id ]
-    let query = "update utilizador u join utilizador_tarefa ut on u.id=ut.id_utilizador join tarefa t on ut.id_tarefa=t.id set t.descricao = ? where t.id = ? and u.id = ?;";
-    return packingRequest(args,query,"Error updating the task","Task updated successfully");
-}
-
-module.exports.updateTaskMessage = updateTaskMessage;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let updateTaskCalendar = (req,body) => {
-    let args = [ body.message, body.id, req.user.id ];
-    let query = "update utilizador u join utilizador_tarefa ut on u.id=ut.id_utilizador join tarefa t on ut.id_tarefa=t.id set t.date = STR_TO_DATE(?,'%Y-%m-%d') where t.id = ? and u.id = ?;";
-    return packingRequest(args,query,"Error updating the task","Task updated successfully");
-}
-
-module.exports.updateTaskCalendar = updateTaskCalendar;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let getProject = (id) => {
-    let query = "select p.titulo from utilizador u join utilizador_projeto up on u.id=up.id_utilizador join projeto p on up.id_projeto=p.id where u.id = ?;";
-    return packingRequest([id],query,"Error getting the task","Task obtained successfully");
-}
-
-module.exports.getProject = getProject;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let getProjectById = (idTask,idUser) => {
-    let query = "select t.titulo from utilizador u join utilizador_tarefa ut on u.id=ut.id_utilizador join tarefa t on  ut.id_tarefa=t.id where t.id = ? and u.id = ?;";
-    return packingRequest([idTask,idUser],query,"Error getting the task","Task obtained successfully");
-}
-
-module.exports.getProjectById = getProjectById;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let editProject = (req,body) => {
-    let args = [ body.message, body.id, req.user.id ];
-    let query = "update utilizador u join utilizador_tarefa ut on u.id=ut.id_utilizador join tarefa t on ut.id_tarefa=t.id set t.titulo = ? where t.id = ? and u.id = ?;";
-    return packingRequest(args,query,"Error updating the task","Task updated successfully");
-}
-
-module.exports.editProject = editProject;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let getMessage = (id) => {
-    let query = "select descricao from tarefa where id = ?;";
-    return packingRequest([id],query,"Error getting the task","Task obtained successfully");
-}
-
-module.exports.getMessage = getMessage;
-
-/**
- * 
- * Function
- * @param {*} params 
- * */ 
-let getCalendar = (id) => {
-    let query = "select date from tarefa where id = ?;";
-    return packingRequest([id],query,"Error getting the task","Task obtained successfully");
-}
-
-module.exports.getCalendar = getCalendar;
-
 /**
  * 
  * 
@@ -284,6 +342,14 @@ let packingRequest = async (args,query,errorMessage,successMessage) => {
     }
 };
 
+let pool  = mysql.createPool({
+    connectionLimit : 10,
+    host            : options.host,
+    user            : options.user,
+    password        : options.password,
+    database        : options.database
+});
+
 /**
  * Function that makes the query to the database
  * @param {String} sql 
@@ -294,23 +360,16 @@ let packingRequest = async (args,query,errorMessage,successMessage) => {
 let sendRequest = (query, data, errorMessage,successMessage) => {
     let success = [];
     success.push({ message: successMessage })
-    try {
-        let sql = mysql.format(query, data);
-        let connection = mysql.createConnection(options);
-        connection.connect(); // Hace verificacion asincrona de conexion.
-        return new Promise((resolve, reject) => {
-            connection.query(sql, function (err, rows, fields) {
-                if (err || rows.length == 0) {
-                    reject(new Exception(errorMessage, 2));
-                } else {
-                    success.push(rows)
-                    resolve({ message: "success", data: success });
-                }
-            });
+    let sql = mysql.format(query, data);
+    return new Promise((resolve, reject) => {
+        pool.query(sql, function (err, rows, fields) {
+            if (err) {
+                reject(new Exception(errorMessage, 2));
+            } else {
+                resolve({ message: "success", data: rows });
+            }
         });
-    } catch (e) {
-        return handleError(e);
-    }
+    });
 };
 
 let isExistArguments = (args) => {

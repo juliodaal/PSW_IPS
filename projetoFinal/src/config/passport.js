@@ -8,12 +8,12 @@ passport.use(new localStrategy({
 }, async (email,password, done) => {
     let response = await requestHandlers.getUser({email});
     if(response.message != "error"){
-        let user = response.data[1][0];
+        let user = response.data[0];
         if(!user) { 
             return done(null, false, { message: "Not User Found" });
         } else {
             let match = await requestHandlers.getUserPass({id: user.id, password});
-            if(match.message != "error"){ 
+            if(match.message == "success" && match.data.length != 0){
                 return done(null, match);
             } else {
                 return done(null, false, { message: "Not User Found" });
@@ -25,15 +25,14 @@ passport.use(new localStrategy({
 }));
 
 passport.serializeUser((response, done) => {
-    let user = response.data[1][0];
+    let user = response.data[0];
     done(null, user.id);
 });
 
 passport.deserializeUser( async (id, done) => {
     let user = await requestHandlers.getUserById({id});
-    console.log(user);
     if(user.message == "success"){
-        user = user.data[1][0]; 
+        user = user.data[0]; 
         done(false, user);
     } else { 
         done(user.data[0].message, false);

@@ -5,16 +5,22 @@
             <button class="btn btn-transparent" id="button-times-menu"><i class="fe-x text-muted mr-2"></i></button>
         </li>
         <li class="list-group-item border-0 d-flex justify-content-start align-items-center box-shadow">
-            <i class="fe-voicemail text-muted mr-2"></i>
-            <a class="nav-link" href="/#">Message</a>
+            <i class="fe-bar-chart text-muted mr-2"></i>
+            <a class="nav-link" href="/statistics">Statistics</a>
         </li>
-        <li class="list-group-item border-0 d-flex justify-content-start align-items-center">
-            <i class="fe-watch text-muted mr-2"></i>
-            <a class="nav-link" href="/#">Message</a>
+        <li class="border-0 justify-content-start align-items-center just-res">
+            <i class="fe-book-open text-muted mr-2"></i>
+            <a class="nav-link" href="/about">Sobre Nós</a>
         </li>
-        <li class="list-group-item border-0 d-flex justify-content-start align-items-center">
-            <i class="fe-wechat text-muted mr-2"></i>
-            <a class="nav-link" href="/#">Message</a>
+        <li class="border-0 justify-content-start align-items-center just-res">
+            <i class="fe-phone text-muted mr-2"></i>
+            <a class="nav-link" href="/contact">Contacte-nos</a>
         </li>
+        {{#if user}}
+            <li class="border-0 justify-content-start align-items-center just-res">
+                <i class="fe-clipboard text-muted mr-2"></i>
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+            </li>
+        {{/if}}
     </ul>
 </nav>

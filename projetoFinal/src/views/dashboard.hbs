@@ -1,27 +1,61 @@
-<section class="container" style="height: fit-content; min-height: 85vh; overflow-y: scroll;">
-    <!-- Basic table -->
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Tipo</th>
-        <th>Quantidade Atual</th>
-        <th>Cheio</th>
-        <th>Total Reciclado</th>
-      </tr>
-    </thead>
-    <tbody>
-        {{#each box}}
-            <tr>
-                <th scope="row">{{id}}</th>
-                <td>{{tipo}}</td>
-                <td>{{quantidade_atual}}</td>
-                <td>{{aviso}}</td>
-                <td>{{total_reciclado}}</td>
-            </tr>
-        {{/each}}
-    </tbody>
-  </table>
-</div>
+
+    <section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;">
+    {{#if addBox}}
+        {{#if user}}
+        <a type="button" href="/box/{{user.id}}" class="btn btn-outline-success mb-4">Agregar Box</a>
+        <a type="button" href="/box/type/{{user.id}}" class="btn btn-outline-info mb-4">Agregar Type Box</a>
+        <a type="button" href="/box/type/delete/{{user.id}}" class="btn btn-outline-danger mb-4">Apagar Type Box</a>
+        {{/if}}
+    {{/if}}
+    <div class="table-responsive">
+    {{#if box}}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Tipo</th>
+            <th>Quantidade Atual</th>
+            <th>Cheio</th>
+            <th>Total Reciclado</th>
+            {{#if addBox}}
+            <th>Editar</th>
+            <th>Apagar</th>
+            {{/if}}
+            <th>Historico</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#if addBox}}
+            {{#each box}}
+                <tr>
+                    <th scope="row">{{id}}</th>
+                    <td>{{tipo}}</td>
+                    <td>{{quantidade_atual}}</td>
+                    <td>{{aviso}}</td>
+                    <td>{{total_reciclado}}</td>
+                    <td><a href="/box/edit/{{id}}"><u>Editar</u></a></td>
+                    <td><a href="/box/delete/{{id}}"><u>Apagar</u></a></td>
+                    <td><a href="/box/statistics/{{id}}"><u>Ver Historico</u></a></td>
+                </tr>
+            {{/each}}
+            {{else}}
+            {{#each box}}
+                <tr>
+                    <th scope="row">{{id}}</th>
+                    <td>{{tipo}}</td>
+                    <td>{{quantidade_atual}}</td>
+                    <td>{{aviso}}</td>
+                    <td>{{total_reciclado}}</td>
+                    <td><a href="/box/statistics/{{id}}"><u>Ver</u></a></td>
+                </tr>
+            {{/each}}
+            {{/if}}
+        </tbody>
+    </table>
+    {{else}}
+    <div class="container my-5">
+        <h1>There is not data</h1>
+    </div>
+    {{/if}}
+    </div>
 </section>

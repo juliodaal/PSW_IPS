@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("www"));
 
 //roteamento
+app.get("/", (req,res) => { res.render("layout.html")});
 app.get("/person", requestHandlers.getPeople);
 app.get("/country", requestHandlers.getCountries);
 

@@ -6,9 +6,11 @@ const { isAuthenticated } = require("../helpers/auth");
 
 router.get('/', indexController.renderIndex);
 
+router.get('/qrcode', indexController.renderQrCode);
+
 router.get('/about', indexController.renderAbout);
 
-router.get("/tasks", isAuthenticated, indexController.renderTasks);
+router.get("/contact", indexController.renderContact);
 
 router.get("/profile", isAuthenticated, indexController.renderProfile);
 

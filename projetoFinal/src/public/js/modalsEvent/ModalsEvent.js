@@ -3,7 +3,9 @@ function ModalsEvent(button, modal, close, changeModal = false) {
         this.modal = modal;
         this.close = close;
         this.changeModal = changeModal;
-        this.initEvents();
+        if(button){
+            this.initEvents();
+        }
 };
 
 ModalsEvent.prototype.initEvents = function() {

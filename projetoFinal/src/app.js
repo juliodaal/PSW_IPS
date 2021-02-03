@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname,"public")));
 
 // Routes
 app.use(require('./routes/index.routes'));
-app.use(require('./routes/task.routes'));
+app.use(require('./routes/dashboard.routes'));
 app.use(require('./routes/users.routes'));
 
 

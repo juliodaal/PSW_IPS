@@ -1,92 +1,44 @@
 <header class="navbar navbar-expand-lg navbar-light bg-light navbar-box-shadow">
   <div class="container px-0 px-xl-3">
     <a class="navbar-brand order-lg-1 mr-0 pr-lg-2 mr-lg-4" href="/">
-      <i class="fe-box" style="font-size: 22px;"></i>
+      <i class="fe-box text-success" style="font-size: 22px;"></i>
     </a>
-    {{#if user}}
     <div class="d-flex align-items-center order-lg-3">
-      <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbarCollapse3">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-tool dropdown">
-        <a class="navbar-tool-icon-box" href="#">
-          <img class="navbar-tool-icon-box-img" src="/images/user/user.png" alt="Avatar"/>
-        </a>
-        <a class="navbar-tool-label dropdown-toggle" href="#"><small>Hello,</small>{{user.nome}}</a>
-        <ul class="dropdown-menu dropdown-menu-right" style="width: 15rem;">
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="/profile">
-              <i class="fe-user font-size-base opacity-60 mr-2"></i>
-              Profile
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="/statistics">
-              <i class="fe-bar-chart font-size-base opacity-60 mr-2"></i>
-              Statistics
-              {{!-- <span class="nav-indicator"></span>
-              <span class="ml-auto font-size-xs text-muted">$735.00</span> --}}
-            </a>
-          </li>
-          <li class="dropdown-divider"></li>
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="/logout">
-              <i class="fe-log-out font-size-base opacity-60 mr-2"></i>
-              Sign out
-            </a>
-          </li>
-        </ul>
-      </div>
+      <button class="btn btn-transparent d-inline-block ml-3" id="button-menu" style="font-size: 22px;"><i class="fe-menu"></i></button>
+      {{#if user}}
+        <div class="navbar-tool dropdown">
+          <a class="navbar-tool-icon-box" href="#">
+            <img class="navbar-tool-icon-box-img" src="/images/user/user.png" alt="Avatar"/>
+          </a>
+          <a class="navbar-tool-label dropdown-toggle" href="#"><small>Hello,</small>{{currentUser.nome}}</a>
+          <ul class="dropdown-menu dropdown-menu-right" style="width: 15rem;">
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/profile">
+                <i class="fe-user font-size-base opacity-60 mr-2"></i>
+                Profile
+              </a>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/logout">
+                <i class="fe-log-out font-size-base opacity-60 mr-2"></i>
+                Sign out
+              </a>
+            </li>
+          </ul>
+        </div>
+      {{else}}
+          <button class="btn btn-success d-inline-block ml-3" id="button-signin">Sign in</button>
+      {{/if}}
     </div>
-    {{else}}
-    <div class="d-flex align-items-center order-lg-3">
-        <button class="btn btn-transparent d-none d-sm-inline-block ml-3" style="font-size: 22px;"><i class="fe-menu"></i></button>
-        <button class="btn btn-primary d-none d-sm-inline-block ml-3" id="button-signup">Sign in</button>
-    </div>
-    {{/if}}
     <div class="collapse navbar-collapse order-lg-2" id="navbarCollapse3">
         <div class="collapse navbar-collapse order-lg-2" id="navbarCollapse1">
             <ul class="navbar-nav mr-auto">
-              {{#if user}}
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="/tasks" data-toggle="dropdown">Tasks</a>
-                  <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" aria-disabled="true" href="/tasks">
-                        <i class="fe-inbox font-size-base opacity-60 mr-2"></i>
-                        Inbox
-                        </a></li>
-                      <li><a class="dropdown-item disabled" aria-disabled="true" href="#">
-                        <i class="fe-home font-size-base opacity-60 mr-2"></i>
-                        Today
-                        </a></li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Projects</a>
-                  <ul class="dropdown-menu" id="nav-projects">
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Priority</a>
-                  <ul class="dropdown-menu">
-                      <li><a class="dropdown-item disabled" aria-disabled="true" href="#">
-                        <i class="fe-bookmark font-size-base opacity-60 mr-2"></i>
-                        Priority 1
-                        </a></li>
-                      <li><a class="dropdown-item disabled" aria-disabled="true" href="#">
-                        <i class="fe-bookmark font-size-base opacity-60 mr-2"></i>
-                        Priority 2
-                      </a></li>
-                  </ul>
-                </li>
-                <li class="ml-3"><a class="nav-link text-primary" href="#" id="button-add-task" data-toggle="dropdown" id="button-add-task">
-                  <i class="fe-plus-square mr-2"></i>
-                  Add Task
-                  </a></li>
-              {{else}}
                 <li class="nav-item"><a class="nav-link" href="/about">Sobre Nós</a></li>
                 <li class="nav-item"><a class="nav-link" href="/contact">Contacte-nos</a></li>
-              {{/if}}
+                {{#if user}}
+                  <li class="nav-item"><a class="nav-link" href="/dashboard">Dasboard</a></li>
+                {{/if}}
             </ul>
         </div>
     </div>

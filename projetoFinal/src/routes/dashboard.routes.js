@@ -7,30 +7,69 @@ const { isAuthenticated } = require("../helpers/auth");
 
 
 
-// // New Task
+// Render Dashboard
 router.get("/dashboard", isAuthenticated, dashboardController.renderDaskboard);
 
-// // Task Done
-// router.put("/task/done", isAuthenticated, taskController.doneTask);
+// Render Create Client
+router.get("/client", isAuthenticated, dashboardController.renderCreateClient);
 
+router.post("/client", isAuthenticated, dashboardController.createClient);
 
-// // Edit Task
-// router.put("/task/edit", isAuthenticated, taskController.updateTask);
+// Render Create Worker
+router.get("/worker", isAuthenticated, dashboardController.renderCreateWorker);
 
-// // Calendar Task
-// router.put("/task/edit/calendar", isAuthenticated, taskController.updateTaskCalendar);
+router.post("/worker", isAuthenticated, dashboardController.createWorker);
 
-// // Projeto Task
-// router.post("/task/projects", isAuthenticated, taskController.getProject);
+// Render Edit Worker
+router.get("/worker/edit/:id", isAuthenticated, dashboardController.renderEditWorker);
 
-// router.post("/task/add/project", isAuthenticated, taskController.createProject)
+// Render Dashboard Client By Id
+router.get("/dashboard/client/:id", isAuthenticated, dashboardController.renderDaskboardById);
 
-// router.put("/task/edit/project", isAuthenticated, taskController.editProjeto);
+// Render Statistics Client
+router.get("/statistics/client/:id", isAuthenticated, dashboardController.renderClientStatistics);
 
-// // Delete Task
-// router.delete("/task/edit/", isAuthenticated, taskController.deleteTask)
+router.post("/statistics/client/:id", isAuthenticated, dashboardController.getClientStatistics);
 
-// // Statistics
-// router.post("/statistics/done", isAuthenticated, taskController.doneStatistics);
+// Edit Client
+router.get("/edit/client/:id", isAuthenticated, dashboardController.renderEditClient);
+
+router.post("/edit/client/:id", isAuthenticated, dashboardController.editClient);
+
+// Delete Client
+router.get("/delete/client/:id", isAuthenticated, dashboardController.renderDeleteClient);
+
+// Delete Worker
+router.get("/worker/delete/:id", isAuthenticated, dashboardController.deleteWorker);
+
+// Render Create Box
+router.get("/box/:id", isAuthenticated, dashboardController.renderCreateBox);
+
+router.post("/box/:id", isAuthenticated, dashboardController.createBox);
+
+// Render Box Edit
+router.get("/box/edit/:id", isAuthenticated, dashboardController.renderEditBox);
+
+router.post("/box/edit/:id", isAuthenticated, dashboardController.editBox);
+
+// Render Box Delete
+router.get("/box/delete/:id", isAuthenticated, dashboardController.deleteBox);
+
+// Render Delete Type Box
+router.get("/box/type/delete/:id", isAuthenticated, dashboardController.renderDeleteTypeBox);
+
+router.post("/box/type/delete/:id", isAuthenticated, dashboardController.deleteTypeBox);
+
+// Render Create Box Type
+router.get("/box/type/:id", isAuthenticated, dashboardController.renderBoxType);
+
+// Create Box Type
+router.post("/box/type/:id", isAuthenticated, dashboardController.createBoxType);
+
+// Find Type Box
+router.get("/box/select/:id", isAuthenticated, dashboardController.findTypesBox);
+
+// Box Statistics By Id 
+router.get("/box/statistics/:id", isAuthenticated, dashboardController.renderBoxStatistics);
 
 module.exports = router;

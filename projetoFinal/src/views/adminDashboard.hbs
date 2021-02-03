@@ -1,4 +1,17 @@
 <section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;">
+    {{!-- {{#if success}}
+        <div class="alert alert-success" role="alert">
+            {{message}}
+        </div>
+    {{/if}}
+    {{#if error}}
+        <div class="alert alert-danger" role="alert">
+            {{message}}
+        </div>
+    {{/if}} --}}
+    <a type="button" href="/client" class="btn btn-outline-success mb-4">Agregar Cliente</a>
+    <a type="button" href="/worker" class="btn btn-outline-info mb-4">Agregar Trabalhador</a>
+    <h1 class="my-3">Clientes</h1>
     <div class="table-responsive">
     <table class="table">
         <thead>
@@ -7,6 +20,10 @@
             <th>Nome</th>
             <th>Apelido</th>
             <th>Email</th>
+            <th>Organização</th>
+            <th>Historico</th>
+            <th>Editar</th>
+            <th>Apagar</th>
             <th>Ver</th>
         </tr>
         </thead>
@@ -17,7 +34,42 @@
                     <td>{{nome}}</td>
                     <td>{{apelido}}</td>
                     <td>{{email}}</td>
+                    <td>{{company}}</td>
+                    <td><a href="/statistics/client/{{id}}"><u>Ver Historico</u></a></td>
+                    <td><a href="/edit/client/{{id}}"><u>Editar</u></a></td>
+                    <td><a href="/delete/client/{{id}}"><u>Apagar</u></a></td>
                     <td><a href="/dashboard/client/{{id}}"><u>Ver</u></a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    </div>
+    <h1 class="my-3">Trabalhadores</h1>
+    <div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Apelido</th>
+            <th>Email</th>
+            <th>Organização</th>
+            <th>Historico</th>
+            <th>Editar</th>
+            <th>Apagar</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#each worker}}
+                <tr>
+                    <th scope="row">{{id}}</th>
+                    <td>{{nome}}</td>
+                    <td>{{apelido}}</td>
+                    <td>{{email}}</td>
+                    <td>{{company}}</td>
+                    <td><a href="/worker/statistics/{{id}}"><u>Ver Historico</u></a></td>
+                    <td><a href="/worker/edit/{{id}}"><u>Editar</u></a></td>
+                    <td><a href="/worker/delete/{{id}}"><u>Apagar</u></a></td>
                 </tr>
             {{/each}}
         </tbody>

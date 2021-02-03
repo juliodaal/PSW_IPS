@@ -26,7 +26,7 @@ usersController.signUp = async (req,res) => {
 
 usersController.signIn = passport.authenticate("local", {
     failureRedirect: "/",
-    successRedirect: "/tasks",
+    successRedirect: "/dashboard"
 });
 
 usersController.logOut = (req,res) => {

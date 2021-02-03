@@ -1,8 +1,9 @@
-<section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;" id="section">
-    <a type="button" href="/box/type" class="btn btn-outline-info mb-4">Add Type Box</a>
+{{#if user}}
+<section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;" id="section" data-user="{{user.id}}">
+    <a type="button" href="/box/type/{{user.id}}" class="btn btn-outline-info mb-4">Agregar Type Box</a>
     <div class="row">
         <div class="col-12 col-sm-6">
-            <form action="/client" method="post">
+            <form action="/box/{{user.id}}" method="post">
                 <div class="form-group">
                     <label for="type-input">Tipo</label>
                     <select class="form-control custom-select" name="type" id="type-input"></select>
@@ -11,7 +12,7 @@
                     <label for="quantity">Quantidade Atual</label>
                     <input class="form-control" type="number" name="quantity" id="quantity-input" placeholder="The Current Quantity Here.." required>
                 </div>
-                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-success" type="submit">Agregar</button>
             </form>
         </div>
         <div class="col-12 col-sm-6 d-flex justify-content-center align-content-center flex-column">
@@ -22,3 +23,6 @@
         </div>
     </div>
 </section>
+{{else}}
+<h1 class="my-5">No Box User</h1>
+{{/if}}

@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{titleDocument}} | To Do Heroes</title>
     {{!-- Styles --}}
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     {{!-- scripts --}}
     <script defer src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script defer type="module" src="js/parallax/jarallax.min.js"></script>
-    <script defer type="module" src="js/parallax/jarallax-element.min.js"></script>
-    <script defer type="module" src="js/parallax/parallax.min.js"></script>
+    <script defer type="module" src="/js/parallax/jarallax.min.js"></script>
+    <script defer type="module" src="/js/parallax/jarallax-element.min.js"></script>
+    <script defer type="module" src="/js/parallax/parallax.min.js"></script>
     {{!-- <script defer type="module" src="js/chartist/dist/chartist.min.js"></script> --}}
     {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script> --}}
     {{!-- <script defer type="module" src="js/cleave/cleave.min.js"></script> --}}
@@ -64,7 +64,7 @@
         height: 2.75rem;
         margin-bottom: .75rem;
         vertical-align: text-bottom;
-        border: .15em solid #766df4;
+        border: .15em solid #16c995;
         border-right-color: transparent;
         border-radius: 50%;
         -webkit-animation: spinner .75s linear infinite;
@@ -94,6 +94,7 @@
     </div>
     {{>navbar}}
     {{{body}}}
+    {{>menu}}
     {{>footer}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     {{!-- <script src="js/chart/chart.js"></script> --}}
