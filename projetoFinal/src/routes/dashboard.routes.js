@@ -31,6 +31,11 @@ router.get("/statistics/client/:id", isAuthenticated, dashboardController.render
 
 router.post("/statistics/client/:id", isAuthenticated, dashboardController.getClientStatistics);
 
+// Render Statistics Worker
+router.get("/worker/statistics/:id", isAuthenticated, dashboardController.renderWorkerStatistics);
+
+router.post("/worker/statistics/:id", isAuthenticated, dashboardController.getWorkerStatistics);
+
 // Edit Client
 router.get("/edit/client/:id", isAuthenticated, dashboardController.renderEditClient);
 
@@ -71,5 +76,7 @@ router.get("/box/select/:id", isAuthenticated, dashboardController.findTypesBox)
 
 // Box Statistics By Id 
 router.get("/box/statistics/:id", isAuthenticated, dashboardController.renderBoxStatistics);
+
+router.post("/box/statistics/:id", isAuthenticated, dashboardController.boxStatistics);
 
 module.exports = router;

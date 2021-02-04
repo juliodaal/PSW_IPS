@@ -1,8 +1,9 @@
-function ChartCanvas(max,min,step,nameChart) {
+function ChartCanvas(max,min,step,nameChart,lineDescription) {
     this.max = max;
     this.min = min;
     this.step = step;
     this.nameChart = nameChart;
+    this.lineDescription = lineDescription;
 }
 
 ChartCanvas.prototype.renderChartCanvas = function() {
@@ -14,12 +15,12 @@ this.config = {
     data: {
         labels: [],
         datasets: [{
-            label: 'Number Task',
+            label: this.lineDescription,
             backgroundColor: [
-                'rgba(153, 102, 255, 0.2)'
+                'rgba(22, 201, 149, 0.2 )'
             ],
             borderColor: [
-                'rgba(153, 102, 255, 1)'
+                'rgba(22, 201, 149, 1)'
             ],
             data: [],
             fill: false,
@@ -51,7 +52,7 @@ this.config = {
                 display: true,
                 scaleLabel: {
                     display: true,
-                    labelString: 'Value'
+                    labelString: this.lineDescription
                 },
                 ticks: {
                     min: this.min,

@@ -114,6 +114,18 @@ module.exports.getClientStatistics = getClientStatistics;
  * Function that creates a new task
  * @param {*} body 
  * */ 
+let getWorkerStatistics = id => {
+    let query = "select id, data from historico_trabalhador where id_utilizador_from_utilizador = ?;";
+    return packingRequest([id],query,"Client do not exists", "Client found");
+}
+
+module.exports.getWorkerStatistics = getWorkerStatistics;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
 let getWorkerById = (id) => {
     let query = "select id,nome,apelido,email,company from utilizador where id = ? and tipo_from_tipo_utilizador = 2;";
     return packingRequest([id],query,"Worker do not exists", "Worker found");
@@ -251,10 +263,40 @@ module.exports.findBox = findBox;
  * Function that creates a new task
  * @param {*} body 
  * */ 
+let boxStatistics = id => {
+    let query = "select sum(quantidade_atual) as 'quantity',data from historico_box where id_box_from_box = ? group by data;";
+    return packingRequest([id],query,"Box Type not found", "Box Type found");
+}
+
+module.exports.boxStatistics = boxStatistics;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
 let editBox = (body,id) => {
     let {quantity,full,recycle} = body;
-    let query = "update box set quantidade_atual = ?, total_reciclado = ?, aviso = ? where id = ?";
-    return packingRequest([quantity,recycle,full,id],query,"Box Type not found", "Box Type found");
+    if(parseInt(full) == 1){
+        let query = "update box set quantidade_atual = ?, total_reciclado = ?, aviso = ? where id = ?";
+        let response = packingRequest([quantity,recycle,full,id],query,"Box not found", "Box found")
+        .then(res => {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0');
+            let yyyy = today.getFullYear();
+            today = yyyy + '-' + dd + '-' + mm;
+            let query = "insert into historico_box (id_box_from_box,quantidade_atual,data) values (?,?,STR_TO_DATE(?,'%Y-%m-%d'));";
+            return packingRequest([id,quantity,today],query,"Box not found", "Box found")
+        })
+        .catch(res =>{
+            return {message: "error", data: []};
+        })
+        return response;
+    } else {
+        let query = "update box set quantidade_atual = ?, total_reciclado = ?, aviso = ? where id = ?";
+        return packingRequest([quantity,recycle,full,id],query,"Box not found", "Box found");
+    }
 }
 
 module.exports.editBox = editBox;

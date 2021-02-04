@@ -7,6 +7,7 @@
         <a type="button" href="/box/type/delete/{{user.id}}" class="btn btn-outline-danger mb-4">Apagar Type Box</a>
         {{/if}}
     {{/if}}
+    <h1 class="my-3">Contentores</h1>
     <div class="table-responsive">
     {{#if box}}
     <table class="table">
@@ -46,7 +47,7 @@
                     <td>{{quantidade_atual}}</td>
                     <td>{{aviso}}</td>
                     <td>{{total_reciclado}}</td>
-                    <td><a href="/box/statistics/{{id}}"><u>Ver</u></a></td>
+                    <td><a href="/box/statistics/{{id}}"><u>Ver Historico</u></a></td>
                 </tr>
             {{/each}}
             {{/if}}

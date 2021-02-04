@@ -1,8 +1,23 @@
 <div class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll; transition: .6s;">
     {{#if user}}
-    <p>{{user.id}}</p>
-    <p>{{user.nome}}</p>
-    <p>{{user.apelido}}</p>
-    <p>{{user.email}}</p>
+    <h1>Hi, {{user.nome}}!</h1>
+    <hr class="my-4">
+    <h3>This are your data:</h3>
+        <div class="form-group">
+            <label for="type">Id</label>
+            <p class="lead">{{user.id}}</p>
+        </div>
+        <div class="form-group">
+            <label for="type">Nome</label>
+            <p class="lead">{{user.nome}}</p>
+        </div>
+        <div class="form-group">
+            <label for="type">Apelido</label>
+            <p class="lead">{{user.apelido}}</p>
+        </div>
+        <div class="form-group">
+            <label for="type">Email</label>
+            <p class="lead">{{user.email}}</p>
+        </div>
     {{/if}}
 </div>

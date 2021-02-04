@@ -1,0 +1,7 @@
+<section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;">
+    {{#if user}}
+        <canvas id="myChart" max-width="400" max-height="400" data-purpose="worker" data-id="{{user.id}}"></canvas>
+    {{else}}
+        <canvas id="myChart" max-width="400" max-height="400" data-purpose="worker"></canvas>
+    {{/if}}
+</section>

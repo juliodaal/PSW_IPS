@@ -1,1 +1,7 @@
-<h1>Box Statistics</h1>
+<section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;">
+    {{#if box}}
+        <canvas id="myChart" max-width="400" max-height="400" data-purpose="box" data-id="{{box.id}}"></canvas>
+    {{else}}
+        <canvas id="myChart" max-width="400" max-height="400" data-purpose="box"></canvas>
+    {{/if}}
+</section>

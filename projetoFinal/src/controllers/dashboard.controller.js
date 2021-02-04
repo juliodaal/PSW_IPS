@@ -93,12 +93,20 @@ dashboardController.renderDaskboardById = async (req,res) => {
     res.render("dashboard", { titleDocument: "Dashboard" , box: response.data, addBox: true, user: req.params, currentUser: req.user});
 }
 dashboardController.renderBoxStatistics = async (req,res) => {
-    // let response = await requestHandlers.getDataDashboardById(req.params.id);
-    res.render("boxStatistics", { titleDocument: "Box Statistics", currentUser: req.user }); //, box: response.data
+    res.render("boxStatistics", { titleDocument: "Box Statistics", currentUser: req.user, box: req.params });
+}
+
+dashboardController.boxStatistics = async (req,res) => {
+    let response = await requestHandlers.boxStatistics(req.params.id);
+    res.json({ response });
 }
 
 dashboardController.renderClientStatistics = async (req,res) => {
-    res.render("clientStatistics", { titleDocument: "Client Statistics", currentUser: req.user, user: req.params}); //, box: response.data
+    res.render("clientStatistics", { titleDocument: "Client Statistics", currentUser: req.user, user: req.params});
+}
+
+dashboardController.renderWorkerStatistics = async (req,res) => {
+    res.render("workerStatistics", { titleDocument: "Worker Statistics", currentUser: req.user, user: req.params});
 }
 
 dashboardController.getClientStatistics = async (req,res) => {
@@ -106,14 +114,19 @@ dashboardController.getClientStatistics = async (req,res) => {
     res.json({ response });
 }
 
+dashboardController.getWorkerStatistics = async (req,res) => {
+    let response = await requestHandlers.getWorkerStatistics(req.params.id);
+    res.json({ response });
+}
+
 dashboardController.renderEditClient = async (req,res) => {
     let response = await requestHandlers.getClientById(req.params.id);
-    res.render("editClient", { titleDocument: "Client Statistics", client: response.data[0], currentUser: req.user }); //, box: response.data
+    res.render("editClient", { titleDocument: "Client Statistics", client: response.data[0], currentUser: req.user });
 }
 
 dashboardController.renderEditWorker = async (req,res) => {
     let response = await requestHandlers.getWorkerById(req.params.id);
-    res.render("editClient", { titleDocument: "Worker Statistics", client: response.data[0], currentUser: req.user }); //, box: response.data
+    res.render("editClient", { titleDocument: "Worker Statistics", client: response.data[0], currentUser: req.user });
 }
 
 dashboardController.editClient = async (req,res) => {
