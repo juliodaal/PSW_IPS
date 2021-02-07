@@ -47,33 +47,17 @@
             <div class="col-lg-10">
               <div class="bg-light box-shadow-lg rounded-lg pt-3 px-4">
                 <div class="cs-pricing-wrap pt-3 px-3">
+                  {{#each box}}
                   <div class="d-md-flex align-items-start border-bottom py-4 py-sm-5 justify-content-between">
                     <div class="ml-4 ml-sm-0 py-2 w-100" style="max-width: 15rem;">
-                      <h3 class="mb-2">Free</h3>
-                      <div class="font-size-xs" style="max-width: 10rem;">Find aute irure dolor in reprehenderit in volatek</div>
+                      <h3 class="mb-2">{{tipo}}</h3>
+                      <div class="font-size-xs" style="max-width: 10rem;">Este é o total de {{tipo}} reciclados</div>
                     </div>
                     <div class="d-flex w-100 align-items-end py-3 py-sm-2 px-4" style="max-width: 20rem;">
-                      <span class="cs-price display-2 font-weight-normal text-success px-1 mr-2 pricing-plan-value" data-current-price="0" data-new-price="0">0</span>
+                      <span class="cs-price display-2 font-weight-normal text-success px-1 mr-2 pricing-plan-value" data-current-price="0" data-new-price="0">{{quantidade}}</span>
                     </div>
                   </div>
-                  <div class="d-md-flex align-items-start border-bottom py-4 py-sm-5 justify-content-between">
-                    <div class="ml-4 ml-sm-0 py-2 w-100" style="max-width: 15rem;">
-                      <h3 class="mb-2">Free</h3>
-                      <div class="font-size-xs" style="max-width: 10rem;">Find aute irure dolor in reprehenderit in volatek</div>
-                    </div>
-                    <div class="d-flex w-100 align-items-end py-3 py-sm-2 px-4" style="max-width: 20rem;">
-                      <span class="cs-price display-2 font-weight-normal text-success px-1 mr-2 pricing-plan-value" data-current-price="0" data-new-price="0">0</span>
-                    </div>
-                  </div>
-                  <div class="d-md-flex align-items-start border-bottom py-4 py-sm-5 justify-content-between">
-                    <div class="ml-4 ml-sm-0 py-2 w-100" style="max-width: 15rem;">
-                      <h3 class="mb-2">Free</h3>
-                      <div class="font-size-xs" style="max-width: 10rem;">Find aute irure dolor in reprehenderit in volatek</div>
-                    </div>
-                    <div class="d-flex w-100 align-items-end py-3 py-sm-2 px-4" style="max-width: 20rem;">
-                      <span class="cs-price display-2 font-weight-normal text-success px-1 mr-2 pricing-plan-value" data-current-price="0" data-new-price="0">0</span>
-                    </div>
-                  </div>
+                  {{/each}}
                 </div>
               </div>
             </div>

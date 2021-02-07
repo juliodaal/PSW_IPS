@@ -109,6 +109,13 @@ dashboardController.renderWorkerStatistics = async (req,res) => {
     res.render("workerStatistics", { titleDocument: "Worker Statistics", currentUser: req.user, user: req.params});
 }
 
+dashboardController.registerBoxEmptied = async (req,res) => {
+    let body = await JSON.parse(Object.keys(req.body)[0]);
+    let response = await requestHandlers.registerBoxEmptied(body, req.user.id);
+    console.log(response)
+    res.json({response});
+}
+
 dashboardController.getClientStatistics = async (req,res) => {
     let response = await requestHandlers.getClientStatistics(req.params.id);
     res.json({ response });

@@ -1,5 +1,6 @@
 <section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;">
-    <div class="row">
+    <h1 class="m-3">Editar Box</h1>
+    <div class="row conteiner">
         <div class="col-12 col-sm-6">
             {{#if box}}
             <form action="/box/edit/{{box.id}}" method="post">
@@ -25,13 +26,13 @@
             <h1 class="text-center">Client Not Found</h1>
             {{/if}}
         </div>
-        <div class="col-12 col-sm-6 d-flex justify-content-center align-content-center flex-column">
+        <div class=" my-5 col-12 col-sm-6 d-flex justify-content-center align-content-center flex-column">
             <h4>Tipo</h4>
             <p>É o tipo de box</p>
             <h4>Quantidade Atual</h4>
             <p>É a quantidade neste momento</p>
             <h4>Cheio</h4>
-            <p>Se encontra cheio?</p>
+            <p>Se encontra cheio? Ao dizer sim, será registado um histórico, no qual o montante actual será adicionado ao histórico.</p>
             <h4>Total Reciclado</h4>
             <p>É o historico de reciclagem</p>
         </div>

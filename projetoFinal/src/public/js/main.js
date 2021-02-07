@@ -64,6 +64,26 @@ App.prototype.activateEvents = function() {
     }
 }
 
+App.prototype.registerBoxEmptied = function() {
+    let iForm = document.getElementById("worker-dashboard");
+    let form = new FormData(iForm);
+    let data = {
+        idBox: form.get("idBox"), 
+        total: form.get("total"), 
+        peso: form.get("peso"), 
+        date: form.get("date")
+    };
+    sendHttpRequest('http://localhost:8081/worker/box','POST',showFeedbackWorker,data);
+}
+
+let showFeedbackWorker = response => {
+    if(response.message == "success"){
+        swal(`${response.message}`, "Box Updated and Registered", `${response.message}`)
+    } else {
+        swal(`${response.message}`, "Error Updating the Box", `${response.message}`)
+    }
+}
+
 let findTypes = (callback, userId) => sendHttpRequest(`http://localhost:8081/box/select/${userId}`,'GET',callback);
 
 let getDataChart = (callback,url,lineDescription) => sendHttpRequest(url,'POST',callback,null,lineDescription);

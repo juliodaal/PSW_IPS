@@ -79,4 +79,7 @@ router.get("/box/statistics/:id", isAuthenticated, dashboardController.renderBox
 
 router.post("/box/statistics/:id", isAuthenticated, dashboardController.boxStatistics);
 
+// Worker Box
+router.post("/worker/box", isAuthenticated, dashboardController.registerBoxEmptied);
+
 module.exports = router;

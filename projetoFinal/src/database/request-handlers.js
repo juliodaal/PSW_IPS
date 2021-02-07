@@ -14,6 +14,18 @@ function Exception(message, type) {
  * Function that creates a new task
  * @param {*} body 
  * */ 
+let getTypeBox = (req) => {
+    let query = "select tipo, sum(b.total_reciclado) as 'quantidade' from tipo_box tb join box b on tb.id = b.tipo_from_tipo_box group by tipo;";
+    return packingRequest([0],query,"Type Box do not found", "Types Box found");
+}
+
+module.exports.getTypeBox = getTypeBox;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
 let getDataDashboard = (req) => {
     let args = [req.user.tipo_from_tipo_utilizador, req.user.id];
     let query = "select b.id,tb.tipo,b.quantidade_atual,b.aviso,b.total_reciclado from utilizador u join box b on u.id=b.id_utilizador_form_utilizador join tipo_box tb on b.tipo_from_tipo_box=tb.id where u.tipo_from_tipo_utilizador = ? and u.id = ? order by id;";
@@ -192,6 +204,56 @@ module.exports.deleteWorker = deleteWorker;
  * Function that creates a new task
  * @param {*} body 
  * */ 
+let registerBoxEmptied = async (body, id) => {
+    let { idBox, total, peso, date } = body
+    let query = "insert into box_ganhos (id_box,total_esvaziado,peso,data) values (?,?,?,STR_TO_DATE(?,'%Y-%m-%d'));";
+    let response = packingRequest([idBox,total,peso,date],query,"Error registering box", "Box resgistered")
+    .then(res => {
+        if(res.message == "success"){
+            let query = "insert into historico_box (id_box_from_box,quantidade_atual,data) values (?,?,STR_TO_DATE(?,'%Y-%m-%d'));";
+            return packingRequest([idBox,total,date],query,"Box not found", "Box found")
+        } else {
+            return {message: "error", data: []};
+        }
+   
+    })
+    .then(res => {
+        if(res.message == "success"){
+            let query = "insert into historico_trabalhador (id_utilizador_from_utilizador,id_box_from_box,data) values (?,?,STR_TO_DATE(?,'%Y-%m-%d'));";
+            return packingRequest([id,idBox,date],query,"Box not found", "Box found")
+        } else {
+            return {message: "error", data: []};
+        }
+    })
+    .then(res => {
+        if(res.message == "success"){
+            let query = "select total_reciclado from box where id = ?";
+            return packingRequest([idBox],query,"Box not found", "Box found")
+        } else {
+            return {message: "error", data: []};
+        }
+    })
+    .then(res => {
+        if(res.message == "success"){
+            let query = "update box set quantidade_atual = ?, total_reciclado = ?, aviso = ? where id = ?";
+            return packingRequest([0,res.data[0].total_reciclado + parseInt(total),0,idBox],query,"Box not found", "Box Updated and Registered")
+        } else {
+            return {message: "error", data: []};
+        }
+    })
+    .catch(res => {
+        return res;
+    })
+    return response;
+}
+
+module.exports.registerBoxEmptied = registerBoxEmptied;
+
+/**
+ * 
+ * Function that creates a new task
+ * @param {*} body 
+ * */ 
 let findTypesBox = (id) => {
     let query = "select tipo from tipo_box where id_utilizador_form_utilizador = ?;";
     return packingRequest([id],query,"Box Type not found", "Box Type found");
@@ -318,10 +380,57 @@ module.exports.deleteBox = deleteBox;
  * Function that creates a new task
  * @param {*} body 
  * */ 
-let deleteTypeBox = (body,id) => {
+let deleteTypeBox = async (body,id) => {
     let {type} = body
-    let query = "delete from tipo_box where tipo = ? and id_utilizador_form_utilizador = ?;";
-    return packingRequest([type,id],query,"Box Type not found", "Box Type found");
+    let query = "select id from tipo_box where tipo = ? and id_utilizador_form_utilizador = ?;";
+    let result = packingRequest([type,id],query,"Box Type not found", "Box Type found")
+    .then(res => {
+        if(res.message == "success"){
+            let query = "select id from box where tipo_from_tipo_box = ? and id_utilizador_form_utilizador = ?";
+            return packingRequest([res.data[0].id,id],query,"Box Type not found", "Box Type found")
+        } else {
+            throw { message: "error", data: [] }
+        }
+    })
+    .then(res => {
+        if(res.message == "success"){
+            let result;
+            res.data.forEach(box => {
+                let query = "delete from historico_box where id_box_from_box = ?;";
+                result = packingRequest([box.id],query,"Box Historic not found", "Box Historic found")
+            });
+            return result;
+        } else {
+            throw { message: "error", data: [] }
+        }
+    });
+    let aux  = await result;
+    if(aux.message == "success"){
+        let query = "select id from tipo_box where tipo = ? and id_utilizador_form_utilizador = ?;";
+        let response = packingRequest([type,id],query,"Box Type not found", "Box Type found")
+        .then(res => {
+            if(res.message == "success"){
+                let query = "delete from box where tipo_from_tipo_box = ? and id_utilizador_form_utilizador = ?;";
+                return packingRequest([res.data[0].id,id],query,"Box Type not found", "Box Type found")
+            } else {
+                throw { message: "error", data: [] }
+            }
+        })
+        .then(res => {
+            if(res.message == "success"){
+                let query = "delete from tipo_box where tipo = ? and id_utilizador_form_utilizador = ?;";
+                return packingRequest([type,id],query,"Box Type not found", "Box Type found");
+            } else {
+                throw { message: "error", data: [] }
+            }
+        })
+        .catch(error => {
+            return error;
+        })
+        return response;
+    } else {
+        return { message: "error", data: []}
+    }
 }
 
 module.exports.deleteTypeBox = deleteTypeBox;

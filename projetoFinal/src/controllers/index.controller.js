@@ -1,8 +1,9 @@
 const requestHandlers = require("../database/request-handlers");
 const IndexController = {};
 
-IndexController.renderIndex = (req,res) => {
-    res.render("index", { titleDocument: "Landing Page" ,currentUser: req.user});
+IndexController.renderIndex = async (req,res) => {
+    let response = await requestHandlers.getTypeBox();
+    res.render("index", { titleDocument: "Landing Page" ,currentUser: req.user, box: response.data});
 };
 
 IndexController.renderAbout = (req,res) => {

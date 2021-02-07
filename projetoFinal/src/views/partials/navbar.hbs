@@ -4,13 +4,13 @@
       <i class="fe-box text-success" style="font-size: 22px;"></i>
     </a>
     <div class="d-flex align-items-center order-lg-3">
-      <button class="btn btn-transparent d-inline-block ml-3" id="button-menu" style="font-size: 22px;"><i class="fe-menu"></i></button>
+      <button class="btn-transparent ml-3 dis-menu" id="button-menu" style="font-size: 22px;"><i class="fe-menu"></i></button>
       {{#if user}}
         <div class="navbar-tool dropdown">
           <a class="navbar-tool-icon-box" href="#">
             <img class="navbar-tool-icon-box-img" src="/images/user/user.png" alt="Avatar"/>
           </a>
-          <a class="navbar-tool-label dropdown-toggle" href="#"><small>Hello,</small>{{currentUser.nome}}</a>
+          <a class="navbar-tool-label dropdown-toggle" href="#"><small>Olá,</small>{{currentUser.nome}}</a>
           <ul class="dropdown-menu dropdown-menu-right" style="width: 15rem;">
             <li>
               <a class="dropdown-item d-flex align-items-center" href="/profile">

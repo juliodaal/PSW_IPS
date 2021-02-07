@@ -1,7 +1,8 @@
 {{#if user}}
 <section class="container my-5" style="height: fit-content; min-height: 85vh; overflow-y: scroll;" id="section" data-user="{{user.id}}">
+    <h1 class="m-3">Agregar Box</h1>
     <a type="button" href="/box/type/{{user.id}}" class="btn btn-outline-info mb-4">Agregar Type Box</a>
-    <div class="row">
+    <div class="row container">
         <div class="col-12 col-sm-6">
             <form action="/box/{{user.id}}" method="post">
                 <div class="form-group">
@@ -15,7 +16,7 @@
                 <button class="btn btn-success" type="submit">Agregar</button>
             </form>
         </div>
-        <div class="col-12 col-sm-6 d-flex justify-content-center align-content-center flex-column">
+        <div class="my-5 col-12 col-sm-6 d-flex justify-content-center align-content-center flex-column">
             <h4>Tipo</h4>
             <p>É o tipo de box</p>
             <h4>Organização</h4>
